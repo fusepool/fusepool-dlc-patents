@@ -45,7 +45,7 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import eu.fusepool.datalifecycle.RDFizer;
+import eu.fusepool.datalifecycle.Rdfizer;
 import java.io.ByteArrayInputStream;
 
 /**
@@ -70,7 +70,7 @@ public class XmlUploader {
     private Parser parser;
 
     @Reference
-    private RDFizer rdfizer;
+    private Rdfizer rdfizer;
         
     
     @Activate
