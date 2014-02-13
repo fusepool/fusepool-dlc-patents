@@ -41,20 +41,12 @@ import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.stanbol.commons.indexedgraph.IndexedMGraph;
 import org.apache.stanbol.commons.web.viewable.RdfViewable;
-import org.apache.stanbol.enhancer.servicesapi.Chain;
-import org.apache.stanbol.enhancer.servicesapi.ChainManager;
-import org.apache.stanbol.enhancer.servicesapi.ContentItem;
-import org.apache.stanbol.enhancer.servicesapi.ContentItemFactory;
-import org.apache.stanbol.enhancer.servicesapi.ContentSource;
-import org.apache.stanbol.enhancer.servicesapi.EnhancementException;
-import org.apache.stanbol.enhancer.servicesapi.EnhancementJobManager;
-import org.apache.stanbol.enhancer.servicesapi.impl.ByteArraySource;
-import org.apache.stanbol.entityhub.servicesapi.site.SiteManager;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import eu.fusepool.datalifecycle.RDFizer;
+import java.io.ByteArrayInputStream;
 
 /**
  * Upload file for which the enhancements are to be computed
@@ -71,22 +63,12 @@ public class XmlUploader {
     private static final Logger log = LoggerFactory.getLogger(XmlUploader.class);
     
     /**
-     * This service allows to get entities from configures sites
-     */
-    @Reference
-    private SiteManager siteManager;
-    /**
      * This service allows accessing and creating persistent triple collections
      */
     
     @Reference
     private Parser parser;
-    @Reference
-    private ContentItemFactory contentItemFactory;
-    @Reference
-    private EnhancementJobManager enhancementJobManager;
-    @Reference
-    private ChainManager chainManager;
+
     @Reference
     private RDFizer rdfizer;
         
@@ -132,28 +114,19 @@ public class XmlUploader {
      * @throws EnhancementException 
      */
     @POST
-    public RdfViewable transformXmlDocument(MultiPartBody body) throws IOException, EnhancementException {
+    public RdfViewable transformXmlDocument(MultiPartBody body) throws IOException {
         final String [] mimeTypeValues = body.getTextParameterValues("mime_type");
         final String mimeType = mimeTypeValues.length > 0 ? mimeTypeValues[0] : null;
         final FormFile file = body.getFormFileParameterValues("file")[0];
-        final ContentSource contentSource = new ByteArraySource(
-                file.getContent(),
-                file.getMediaType().toString(),
-                file.getFileName());
-        final ContentItem contentItem = contentItemFactory.createContentItem(contentSource);
+
         
         
         // Transform the XML data into RDF
-        MGraph graph = rdfizer.transform(contentSource.getStream());
+        MGraph graph = rdfizer.transform(new ByteArrayInputStream(file.getContent()));
         
-        int numTriples = graph.size();
         
-        //this contains the enhancement results
-        final MGraph resultGraph = contentItem.getMetadata();
-        //this is the IRI assigned to the submitted content
-        final UriRef contentIri = contentItem.getUri();
         //this represent the submitted Content within the resultGraph
-        final GraphNode node = new GraphNode(contentIri, resultGraph);
+        final GraphNode node = new GraphNode(graph.iterator().next().getSubject(), graph);
         //node is the "root" for rendering the results 
         return new RdfViewable("triples", node, XmlUploader.class);
     }
