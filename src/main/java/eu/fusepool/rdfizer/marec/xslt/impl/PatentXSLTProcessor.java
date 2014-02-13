@@ -32,7 +32,7 @@ public class PatentXSLTProcessor implements XMLProcessor {
         
         if(tFactory==null) {
             
-            tFactory = TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl", this.getClass().getClassLoader() );
+            tFactory = TransformerFactory.newInstance();
             
         }
                 
