@@ -24,7 +24,7 @@
   </parent>
 
   <groupId>eu.fusepool</groupId>
-  <artifactId>patentrdfizer</artifactId>
+  <artifactId>fusepool-dlc-patents</artifactId>
   <version>1.0-SNAPSHOT</version>
   
   <packaging>bundle</packaging>
