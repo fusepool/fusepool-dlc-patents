@@ -13,32 +13,32 @@ import javax.xml.transform.stream.StreamSource;
  */
 public class ResourceURIResolver implements URIResolver {
 
-	URIResolver defaultResolver = null;
-	
-	public ResourceURIResolver(URIResolver resolver) {
-		defaultResolver = resolver ;
-	}
-	
-	public Source resolve(String href, String base)
-			throws TransformerException {
+    URIResolver defaultResolver = null;
+    
+    public ResourceURIResolver(URIResolver resolver) {
+        defaultResolver = resolver ;
+    }
+    
+    public Source resolve(String href, String base)
+            throws TransformerException {
 
-		if(href==null||"".equals(href))
-			return null;
-		
-		StreamSource sSource = null ;
-		InputStream xslIs = this.getClass().getResourceAsStream("/xsl/"+href) ;
-		if(xslIs!=null) {
-			sSource = new StreamSource(xslIs) ;
-			return  sSource ;
-		} else {
-			xslIs = this.getClass().getResourceAsStream(href) ; 
-			if(xslIs!=null) {
-				sSource = new StreamSource(xslIs) ;
-				return  sSource ;
-			} else {
-				return defaultResolver.resolve(href, base) ;
-			}
-		}
-	}
+        if(href==null||"".equals(href))
+            return null;
+        
+        StreamSource sSource = null ;
+        InputStream xslIs = this.getClass().getResourceAsStream("/xsl/"+href) ;
+        if(xslIs!=null) {
+            sSource = new StreamSource(xslIs) ;
+            return  sSource ;
+        } else {
+            xslIs = this.getClass().getResourceAsStream(href) ; 
+            if(xslIs!=null) {
+                sSource = new StreamSource(xslIs) ;
+                return  sSource ;
+            } else {
+                return defaultResolver.resolve(href, base) ;
+            }
+        }
+    }
 
 }

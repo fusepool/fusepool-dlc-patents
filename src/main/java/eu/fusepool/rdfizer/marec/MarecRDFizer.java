@@ -28,73 +28,73 @@ import eu.fusepool.rdfizer.marec.xslt.impl.PatentXSLTProcessor;
 @Component(immediate = true, metatype = true, policy = ConfigurationPolicy.OPTIONAL)
 @Service(RDFizer.class)
 @Properties(value = {
-	    @Property(name = Constants.SERVICE_RANKING, 
-	    		intValue = MarecRDFizer.DEFAULT_SERVICE_RANKING)
+        @Property(name = Constants.SERVICE_RANKING, 
+                intValue = MarecRDFizer.DEFAULT_SERVICE_RANKING)
 })
 public class MarecRDFizer implements RDFizer {
-	
-	/**
-	 * Default value for the {@link Constants#SERVICE_RANKING} used by this engine.
-	 * This is a negative value to allow easy replacement by this engine depending
-	 * to a remote service with one that does not have this requirement
-	 */
-	public static final int DEFAULT_SERVICE_RANKING = 101;
-	
-	public final String RDFIZER_TYPE_LABEL = "rdfizer";
-	
-	public final String RDFIZER_TYPE_VALUE = "marec";
-	
-	final Logger log = LoggerFactory.getLogger(this.getClass()) ;
-	
-	@Reference
-	protected Parser parser;
-	
-	protected CatalogBuilder catalogBuilder ;
-	
-	XMLProcessor processor = null;
-	
+    
+    /**
+     * Default value for the {@link Constants#SERVICE_RANKING} used by this engine.
+     * This is a negative value to allow easy replacement by this engine depending
+     * to a remote service with one that does not have this requirement
+     */
+    public static final int DEFAULT_SERVICE_RANKING = 101;
+    
+    public final String RDFIZER_TYPE_LABEL = "rdfizer";
+    
+    public final String RDFIZER_TYPE_VALUE = "marec";
+    
+    final Logger log = LoggerFactory.getLogger(this.getClass()) ;
+    
+    @Reference
+    protected Parser parser;
+    
+    protected CatalogBuilder catalogBuilder ;
+    
+    XMLProcessor processor = null;
+    
 
-	public MGraph transform(InputStream stream) {
-		
-		MGraph xml2rdf = null;
-		
-		XMLProcessor processor = new PatentXSLTProcessor() ;
-		InputStream rdfIs = null ; 
-	
-		log.debug("Starting transformation from XML to RDF");
-		
-		try {
-			
-			xml2rdf = new IndexedMGraph();
-			rdfIs = processor.processXML( stream ) ;
-			parser.parse(xml2rdf, rdfIs, SupportedFormat.RDF_XML) ;
-			rdfIs.close() ;
-			
-			
-		} catch (Exception e) {
-			log.error("Error while processing the XML data.", e) ;
-		}
-		
-		log.info("Finished transformation from XML to RDF");
-		
-		return xml2rdf;
-	}
+    public MGraph transform(InputStream stream) {
+        
+        MGraph xml2rdf = null;
+        
+        XMLProcessor processor = new PatentXSLTProcessor() ;
+        InputStream rdfIs = null ; 
+    
+        log.debug("Starting transformation from XML to RDF");
+        
+        try {
+            
+            xml2rdf = new IndexedMGraph();
+            rdfIs = processor.processXML( stream ) ;
+            parser.parse(xml2rdf, rdfIs, SupportedFormat.RDF_XML) ;
+            rdfIs.close() ;
+            
+            
+        } catch (Exception e) {
+            log.error("Error while processing the XML data.", e) ;
+        }
+        
+        log.info("Finished transformation from XML to RDF");
+        
+        return xml2rdf;
+    }
 
-	public String getName() {
-		return this.RDFIZER_TYPE_VALUE;
-	}
-	
-	@Activate
+    public String getName() {
+        return this.RDFIZER_TYPE_VALUE;
+    }
+    
+    @Activate
     protected void activate(ComponentContext context) {
         log.info("Marec XML Rdfize service is being activated");
         
         // Build the catalog of DTDs files
         catalogBuilder = new CatalogBuilder(context.getBundleContext()) ;
-		try {
-			catalogBuilder.build() ;
-		} catch (Exception e) {
-			log.error("Error building DTDs catalog", e) ;
-		}
+        try {
+            catalogBuilder.build() ;
+        } catch (Exception e) {
+            log.error("Error building DTDs catalog", e) ;
+        }
 
     }
 

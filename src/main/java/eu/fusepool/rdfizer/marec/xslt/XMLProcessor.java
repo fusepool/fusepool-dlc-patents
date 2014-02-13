@@ -4,6 +4,6 @@ import java.io.InputStream;
 
 public interface XMLProcessor {
 
-	public InputStream processXML(InputStream is) throws Exception;
+    public InputStream processXML(InputStream is) throws Exception;
 
 }
