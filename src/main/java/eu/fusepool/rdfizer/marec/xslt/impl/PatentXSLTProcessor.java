@@ -17,48 +17,44 @@ import eu.fusepool.rdfizer.marec.xslt.MarecXMLReader;
 import eu.fusepool.rdfizer.marec.xslt.ResourceURIResolver;
 import eu.fusepool.rdfizer.marec.xslt.XMLProcessor;
 
-
 /**
  * @author giorgio
  * @author luigi
- * 
+ *
  */
 public class PatentXSLTProcessor implements XMLProcessor {
-    
+
     private TransformerFactory tFactory;
-    
+
     public PatentXSLTProcessor() {
-        
-        
-        if(tFactory==null) {
-            
-            tFactory = TransformerFactory.newInstance();
-            
+
+        //just referencing the class to make sure it's in the OSGi import and available
+        if (net.sf.saxon.TransformerFactoryImpl.class == null) {
+            throw new RuntimeException("You'll never get this exception");
         }
-                
+        tFactory = TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl", this.getClass().getClassLoader());
+
     }
-    
+
     public InputStream processXML(InputStream is) throws Exception {
-        URIResolver defResolver = tFactory.getURIResolver() ;
-        ResourceURIResolver customResolver = new ResourceURIResolver(defResolver) ;
-        tFactory.setURIResolver(customResolver) ;
-        
+        URIResolver defResolver = tFactory.getURIResolver();
+        ResourceURIResolver customResolver = new ResourceURIResolver(defResolver);
+        tFactory.setURIResolver(customResolver);
+
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        InputStream xslIs = this.getClass().getResourceAsStream("/xsl/marec.xsl") ;
-        StreamSource xlsSS = new StreamSource(xslIs) ;
+        InputStream xslIs = this.getClass().getResourceAsStream("/xsl/marec.xsl");
+        StreamSource xlsSS = new StreamSource(xslIs);
         Transformer transformer = tFactory.newTransformer(xlsSS);
-        
-        InputSource inputSource = new InputSource(is) ;
-        
+
+        InputSource inputSource = new InputSource(is);
+
         ResolvingXMLFilter filter = new ResolvingXMLFilter(new MarecXMLReader());
-        
-        SAXSource saxSource = new SAXSource(filter, inputSource) ;
-        StreamResult sRes = new StreamResult(outputStream) ;
-        transformer.transform(saxSource, sRes) ; 
-        
+
+        SAXSource saxSource = new SAXSource(filter, inputSource);
+        StreamResult sRes = new StreamResult(outputStream);
+        transformer.transform(saxSource, sRes);
+
         return new ByteArrayInputStream(outputStream.toByteArray());
-        
+
     }
-    
-    
 }
