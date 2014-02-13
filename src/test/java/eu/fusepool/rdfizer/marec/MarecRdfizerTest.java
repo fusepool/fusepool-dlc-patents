@@ -30,8 +30,15 @@ public class MarecRdfizerTest {
     Rdfizer rdfizer = new MarecRdfizer();
     
     @Test
-    public void simple() {
+    public void fileUS() {
         InputStream in = this.getClass().getResourceAsStream("US-H1-H.xml");
+        MGraph mGraph = rdfizer.transform(in);
+        Assert.assertTrue(mGraph.size() > 0);
+    }
+    
+    @Test
+    public void fileEP() {
+        InputStream in = this.getClass().getResourceAsStream("EP-1000000-A1.xml");
         MGraph mGraph = rdfizer.transform(in);
         Assert.assertTrue(mGraph.size() > 0);
     }
