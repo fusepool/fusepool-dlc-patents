@@ -1,8 +1,11 @@
 package eu.fusepool.rdfizer.marec;
 
 import java.io.InputStream;
+import java.security.AccessController;
+import java.security.AllPermission;
 
 import org.apache.clerezza.rdf.core.MGraph;
+import org.apache.clerezza.rdf.core.impl.SimpleMGraph;
 import org.apache.clerezza.rdf.core.serializedform.Parser;
 import org.apache.clerezza.rdf.core.serializedform.SupportedFormat;
 import org.apache.felix.scr.annotations.Activate;
@@ -55,27 +58,34 @@ public class MarecRdfizer implements Rdfizer {
     
 
     public MGraph transform(InputStream stream) {
+    	
+    	AccessController.checkPermission(new AllPermission());
         
-        MGraph xml2rdf = null;
+        MGraph xml2rdf = new SimpleMGraph();
         
         XMLProcessor processor = new PatentXSLTProcessor() ;
-        InputStream rdfIs = null ; 
+        
+        InputStream rdfIs = null;
     
         log.debug("Starting transformation from XML to RDF");
         
         try {
             
-            xml2rdf = new IndexedMGraph();
-            rdfIs = processor.processXML( stream ) ;
-            parser.parse(xml2rdf, rdfIs, SupportedFormat.RDF_XML) ;
-            rdfIs.close() ;
+        	rdfIs = processor.processXML( stream ) ;
+        	
+        	if(rdfIs != null) {
+        		parser.parse(xml2rdf, rdfIs, SupportedFormat.RDF_XML) ;
+        	}
+            
+        	rdfIs.close();
+        	
+            log.info("Finished transformation from XML to RDF");
             
             
         } catch (Exception e) {
-            log.error("Error while processing the XML data.", e) ;
+            log.error("Error while transforming XML data into RDF.", e) ;
         }
         
-        log.info("Finished transformation from XML to RDF");
         
         return xml2rdf;
     }
