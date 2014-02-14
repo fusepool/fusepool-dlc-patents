@@ -28,18 +28,11 @@ public class MarecXMLReader extends ResolvingXMLReader {
      */
     public MarecXMLReader() throws SAXNotRecognizedException, Exception {
         super();
-        String [] catalogs =  
-              {"file:///"+CatalogBuilder.getCatalogPath()};
+        String [] catalogs = {"file:///" + CatalogBuilder.getCatalogPath()};
         // Create catalog resolver and set a catalog list.
         resolver = new XMLCatalogResolver();
         resolver.setPreferPublic(true);
         resolver.setCatalogList(catalogs);
-        
-        // Set the resolver on the parser.
-        //EntityResolver2 resolver = new DTDResolver() ;
-//        this.setProperty(
-//          "http://apache.org/xml/properties/internal/entity-resolver", 
-//          this);
         
     }
 
