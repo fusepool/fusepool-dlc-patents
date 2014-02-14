@@ -16,6 +16,9 @@
 -->
 <@namespace dct="http://purl.org/dc/terms/" />
 <@namespace fise="http://fise.iks-project.eu/ontology/" />
+<@namespace dcterms="http://purl.org/dc/terms/" />
+<@namespace rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" />
+<@namespace rdfs="http://www.w3.org/2000/01/rdf-schema#" />
 
 <html>
   <head>
@@ -24,8 +27,9 @@
   </head>
 
   <body>
-    <h1>Triples</h1>
-    The uploaded file hast URI: <@ldpath path="."/><br/>
+    <h1>Rdfize a Marec XML document</h1>
+    The uploaded file's URI is: <@ldpath path="."/><br/>
+    Transformation result: <@ldpath path="rdfs:comment"/><br/>
     <@ldpath path="^fise:extracted-from">
         <p>Annotation: <@ldpath path="."/><br/>
         <!-- unfortunately it doesn't seem to be possible to show all the properties and there values -->
