@@ -16,13 +16,16 @@
 */
 package eu.fusepool.rdfizer.marec;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
+
 import org.apache.clerezza.jaxrs.utils.TrailingSlash;
 import org.apache.clerezza.jaxrs.utils.form.FormFile;
 import org.apache.clerezza.jaxrs.utils.form.MultiPartBody;
@@ -44,12 +47,13 @@ import org.apache.stanbol.commons.web.viewable.RdfViewable;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import eu.fusepool.datalifecycle.Rdfizer;
-import java.io.ByteArrayInputStream;
+import org.apache.commons.io.IOUtils;
+
+
 
 /**
- * Upload file for which the enhancements are to be computed
+ * Upload XML file to be transformed into RDF 
  */
 @Component
 @Service(Object.class)
@@ -70,8 +74,7 @@ public class XmlUploader {
     private Parser parser;
 
     @Reference
-    private Rdfizer rdfizer;
-        
+    Rdfizer rdfizer;
     
     @Activate
     protected void activate(ComponentContext context) {
@@ -113,20 +116,26 @@ public class XmlUploader {
      * This service returns an RdfVieable describing the enhanced document. 
      * @throws EnhancementException 
      */
-    @POST
+    @SuppressWarnings("deprecation")
+	@POST
     public RdfViewable transformXmlDocument(MultiPartBody body) throws IOException {
         final String [] mimeTypeValues = body.getTextParameterValues("mime_type");
         final String mimeType = mimeTypeValues.length > 0 ? mimeTypeValues[0] : null;
         final FormFile file = body.getFormFileParameterValues("file")[0];
-
         
+        int numTriples = 0;
         
         // Transform the XML data into RDF
         MGraph graph = rdfizer.transform(new ByteArrayInputStream(file.getContent()));
         
+        numTriples = graph.size();
+        
+        log.info("Extracted " + graph.size() + " triples from " + file.getFileName());
+        
         
         //this represent the submitted Content within the resultGraph
         final GraphNode node = new GraphNode(graph.iterator().next().getSubject(), graph);
+        node.addProperty(RDFS.comment, new PlainLiteralImpl(numTriples + " have been extracted from " + file.getFileName()));
         //node is the "root" for rendering the results 
         return new RdfViewable("triples", node, XmlUploader.class);
     }
