@@ -32,7 +32,7 @@ public class CatalogBuilder {
 
     private final static String CATALOG_FILE = "catalog.xml" ;
 
-    private static String catalogPath ;
+    public static String catalogPath ;
 
 
     final static String BASE_DTD_FOLDER = "dtd" + File.separator ;
@@ -40,14 +40,27 @@ public class CatalogBuilder {
     
     final Logger log = LoggerFactory.getLogger(CatalogBuilder.class);
 
-    private final BundleContext bundleContext ;
+    private BundleContext bundleContext;
 
+    
     public CatalogBuilder(BundleContext ctx) {
         bundleContext = ctx ;
+        log.info("Bundle storage area: " + ctx.getDataFile(""));
+    }
+    
+    
+    /*
+    public CatalogBuilder() {
+        File dtdFolder = new File(""); 
+    }
+    */
+    /*
+    public void setContext(BundleContext context){
+        bundleContext = context;
     }
 
     /**
-     * Copies the dtd files in the storage area of the bundle
+     * Copies the dtd files in the data storage area provided for the bundle by the framework
      */
     public void build() throws Exception {
 
@@ -176,7 +189,6 @@ public class CatalogBuilder {
             ZipFile zf = new ZipFile(srcFile) ;    
 
             Enumeration<? extends ZipEntry> entries = zf.entries();
-//            ZipInputStream zipInput = null;
 
             while (entries.hasMoreElements()) {
                 ZipEntry zipEntry=entries.nextElement();
@@ -186,9 +198,7 @@ public class CatalogBuilder {
                 String fileName = zipEntry.getName();
 
                 // target
-                File newFile = bundleContext.getDataFile(outputFolder + fileName) ; 
-                //create all non existing folders
-                //else you will hit FileNotFoundException for compressed folder
+                File newFile = bundleContext.getDataFile(outputFolder + fileName) ;              
                 
                 File parent = newFile.getParentFile() ;
                 if(!parent.exists() && !parent.mkdirs()){
