@@ -28,7 +28,8 @@ public class MarecXMLReader extends ResolvingXMLReader {
      */
     public MarecXMLReader() throws SAXNotRecognizedException, Exception {
         super();
-        String [] catalogs = {"file:///" + CatalogBuilder.getCatalogPath()};
+        String catalogPath = FileCatalogBuilder.getCatalogPath();
+        String [] catalogs = {"file:///" + catalogPath};
         // Create catalog resolver and set a catalog list.
         resolver = new XMLCatalogResolver();
         resolver.setPreferPublic(true);
@@ -42,10 +43,10 @@ public class MarecXMLReader extends ResolvingXMLReader {
     @Override
     public InputSource resolveEntity(String publicId, String systemId) {
         try {
-            //System.out.println("<public publicId=\""+publicId+"\"" + " uri=\""+systemId+"\" />");
+            System.out.println("<public publicId=\"" + publicId + "\"" + " uri=\"" + systemId + "\" />");
             InputSource is = resolver.resolveEntity(publicId, systemId);
-            if(is==null) {
-                //System.out.println("############ NOT FOUND #########<public publicId=\""+publicId+"\"" + " uri=\""+systemId+"\" />");
+            if(is == null) {
+                System.out.println("############ NOT FOUND #########<public publicId=\""+publicId+"\"" + " uri=\""+systemId+"\" />");
             }
             return is ;
         } catch (SAXException e) {
