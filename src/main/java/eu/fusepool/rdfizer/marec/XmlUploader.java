@@ -135,7 +135,7 @@ public class XmlUploader {
         
         //this represent the submitted Content within the resultGraph
         final GraphNode node = new GraphNode(graph.iterator().next().getSubject(), graph);
-        node.addProperty(RDFS.comment, new PlainLiteralImpl(numTriples + " have been extracted from " + file.getFileName()));
+        node.addProperty(RDFS.comment, new PlainLiteralImpl(numTriples + " triples have been extracted from " + file.getFileName()));
         //node is the "root" for rendering the results 
         return new RdfViewable("triples", node, XmlUploader.class);
     }
