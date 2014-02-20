@@ -23,7 +23,7 @@ public class PatentXSLTProcessorTest {
         
        try {
             
-           InputStream in = this.getClass().getResourceAsStream("/test/EP-1000000-A1.rdf");
+           InputStream in = this.getClass().getResourceAsStream("EP-1000000-A1.rdf");
            
            Parser parser = Parser.getInstance();
            
@@ -55,7 +55,7 @@ public class PatentXSLTProcessorTest {
         // Transform a XML file
         try {
             
-            InputStream in = this.getClass().getResourceAsStream("/test/EP-1000000-A1.xml");
+            InputStream in = this.getClass().getResourceAsStream("EP-1000000-A1.xml");
             
             //System.out.println(IOUtils.toString(in));
             

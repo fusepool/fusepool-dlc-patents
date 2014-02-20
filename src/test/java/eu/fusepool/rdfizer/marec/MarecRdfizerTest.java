@@ -21,7 +21,7 @@ import org.apache.clerezza.rdf.core.MGraph;
 import org.apache.clerezza.rdf.core.serializedform.Parser;
 import org.junit.Assert;
 import org.junit.Test;
-import org.apache.clerezza.rdf.jena.parser.JenaParserProvider;
+import org.junit.Before;
 
 /**
  *
@@ -29,29 +29,21 @@ import org.apache.clerezza.rdf.jena.parser.JenaParserProvider;
  */
 public class MarecRdfizerTest {
     
-    Rdfizer rdfizer = new MarecRdfizer();
+    Rdfizer rdfizer;
+    
+    @Before
+    public void setUp() {
+        MarecRdfizer marecRdfizer = new MarecRdfizer();
+        marecRdfizer.parser = Parser.getInstance();
+        rdfizer = marecRdfizer;
+    }
     
     @Test
     public void epoXml() {
-        //AccessController.checkPermission(new AllPermission());
-        /*
-        InputStream in = this.getClass().getResourceAsStream("/test/EP-1000000-A1.xml");
-        
-        Parser parser = Parser.getInstance();
-        parser.bindParsingProvider(new JenaParserProvider());
-        
+        InputStream in = this.getClass().getResourceAsStream("EP-1000000-A1.xml");        
         MGraph mGraph = rdfizer.transform(in);
         Assert.assertTrue(mGraph.size() > 0);
-        */
     }
-    
-    @Test
-    public void pubMedXml() {
-    	/*
-        InputStream in = this.getClass().getResourceAsStream("EP-1000000-A1.xml");
-        MGraph mGraph = rdfizer.transform(in);
-        Assert.assertTrue(mGraph.size() > 0);
-        */
-    }
+
     
 }
