@@ -16,19 +16,8 @@ import org.xml.sax.InputSource;
 import eu.fusepool.rdfizer.marec.xslt.MarecXMLReader;
 import eu.fusepool.rdfizer.marec.xslt.ResourceURIResolver;
 import eu.fusepool.rdfizer.marec.xslt.XMLProcessor;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.crypto.dsig.TransformException;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.dom.DOMSource;
-import org.xml.sax.EntityResolver;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXNotRecognizedException;
 
 /**
  * @author giorgio
@@ -63,19 +52,6 @@ public class PatentXSLTProcessor implements XMLProcessor {
 
         ResolvingXMLFilter filter = new ResolvingXMLFilter(new MarecXMLReader());
 
-       /* DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setValidating(false); // turns off validation
-        factory.setSchema(null);      // turns off use of schema
-        // but that's *still* not enough!
-        DocumentBuilder builder;
-        try {
-            builder = factory.newDocumentBuilder();
-        } catch (ParserConfigurationException ex) {
-            throw new RuntimeException(ex);
-        }
-        builder.setEntityResolver(new NullEntityResolver());
-        
-        builder.parse(inputSource);*/
         Source saxSource = new SAXSource(filter, inputSource);
 
         StreamResult sRes = new StreamResult(outputStream);
@@ -86,16 +62,4 @@ public class PatentXSLTProcessor implements XMLProcessor {
 
     }
 
-    /**
-     * my resolver that doesn't
-     */
-    private static class NullEntityResolver implements EntityResolver {
-
-        public InputSource resolveEntity(String publicId, String systemId)
-                throws SAXException, IOException {
-            // Message only for debugging / if you care
-            System.out.println("I'm asked to resolve: " + publicId + " / " + systemId);
-            return new InputSource(new ByteArrayInputStream(new byte[0]));
-        }
-    }
 }
