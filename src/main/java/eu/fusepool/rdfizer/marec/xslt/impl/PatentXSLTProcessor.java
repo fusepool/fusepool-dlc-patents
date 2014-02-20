@@ -47,7 +47,7 @@ public class PatentXSLTProcessor implements XMLProcessor {
         Transformer transformer = tFactory.newTransformer(xlsSS);
 
         InputSource inputSource = new InputSource(is);
-
+        
         ResolvingXMLFilter filter = new ResolvingXMLFilter(new MarecXMLReader());
 
         SAXSource saxSource = new SAXSource(filter, inputSource);
