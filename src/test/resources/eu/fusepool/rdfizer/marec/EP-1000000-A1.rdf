@@ -17,22 +17,22 @@
       <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
    </rdf:Description>
    <rdf:Description xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                    rdf:about="urn:x-temp:/prov/activity/277ae6e2-81ad-417c-b432-9d7b4f1f5e9a">
+                    rdf:about="urn:x-temp:/prov/activity/0946ebf8-e1cd-4498-9ebe-3cd94404fe11">
       <rdf:type rdf:resource="http://www.w3.org/ns/prov#Activity"/>
       <rdfs:label xml:lang="en">Transformed EP-1000000-A1 data</rdfs:label>
-      <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-07-10T17:15:22Z</prov:startedAtTime>
+      <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-02-20T13:01:51Z</prov:startedAtTime>
       <prov:wasAssociatedWith rdf:resource="http://csarven.ca/#i"/>
-      <prov:used rdf:resource="urn:x-temp:/data/EP-1000000-A1.xml"/>
+      <prov:used rdf:resource=""/>
       <prov:used rdf:resource="https://github.com/fusepool/patents-reengineering/src/main/resources/xsl/marec.xsl"/>
       <prov:generated>
          <rdf:Description rdf:about="urn:x-temp:/doc/patent/EP-1000000-A1">
             <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
             <prov:wasAttributedTo rdf:resource="http://csarven.ca/#i"/>
-            <prov:generatedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-07-10T17:15:22Z</prov:generatedAtTime>
-            <prov:wasDerivedFrom rdf:resource="urn:x-temp:/data/EP-1000000-A1.xml"/>
-            <prov:wasGeneratedBy rdf:resource="urn:x-temp:/prov/activity/277ae6e2-81ad-417c-b432-9d7b4f1f5e9a"/>
+            <prov:generatedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-02-20T13:01:51Z</prov:generatedAtTime>
+            <prov:wasDerivedFrom rdf:resource=""/>
+            <prov:wasGeneratedBy rdf:resource="urn:x-temp:/prov/activity/0946ebf8-e1cd-4498-9ebe-3cd94404fe11"/>
             <dcterms:license rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/"/>
-            <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-07-10T17:15:22Z</dcterms:issued>
+            <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-02-20T13:01:51Z</dcterms:issued>
             <dcterms:creator rdf:resource="http://csarven.ca/#i"/>
          </rdf:Description>
       </prov:generated>
@@ -81,44 +81,11 @@
          </rdf:Description>
       </property:priority-claim>
    </rdf:Description>
+   <rdf:Description rdf:about="urn:x-temp:/doc/patent/EP-1000000-A1"/>
    <rdf:Description rdf:about="urn:x-temp:/doc/patent/EP-1000000-A1">
-      <pmo:classifiedAs>
-         <rdf:Description rdf:about="urn:x-temp:/concept/cpc/1/B28B1/29">
-            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-            <pmo:classifiedPatent rdf:resource="urn:x-temp:/doc/patent/EP-1000000-A1"/>
-            <pmo:classificationCode>B28B1/29</pmo:classificationCode>
-            <skos:notation>B28B1/29</skos:notation>
-         </rdf:Description>
-      </pmo:classifiedAs>
-      <pmo:classifiedAs>
-         <rdf:Description rdf:about="urn:x-temp:/concept/cpc/3/B28B5/022">
-            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-            <pmo:classifiedPatent rdf:resource="urn:x-temp:/doc/patent/EP-1000000-A1"/>
-            <pmo:classificationCode>B28B5/022</pmo:classificationCode>
-            <skos:notation>B28B5/022</skos:notation>
-         </rdf:Description>
-      </pmo:classifiedAs>
-      <pmo:classifiedAs>
-         <rdf:Description rdf:about="urn:x-temp:/concept/cpc/1/B28B7/0064">
-            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-            <pmo:classifiedPatent rdf:resource="urn:x-temp:/doc/patent/EP-1000000-A1"/>
-            <pmo:classificationCode>B28B7/0064</pmo:classificationCode>
-            <skos:notation>B28B7/0064</skos:notation>
-         </rdf:Description>
-      </pmo:classifiedAs>
-      <pmo:classifiedAs>
-         <rdf:Description rdf:about="urn:x-temp:/concept/cpc/1/H02P6/08">
-            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-            <pmo:classifiedPatent rdf:resource="urn:x-temp:/doc/patent/EP-1000000-A1"/>
-            <pmo:classificationCode>H02P6/08</pmo:classificationCode>
-            <skos:notation>H02P6/08</skos:notation>
-         </rdf:Description>
-      </pmo:classifiedAs>
-   </rdf:Description>
-   <rdf:Description rdf:about="urn:x-temp:/doc/patent/EP-1000000-A1">
-      <dcterms:title xml:lang="de">Vorrichtung zur Herstellung von Steinformlingen für die Ziegelindustrie</dcterms:title>
+      <dcterms:title xml:lang="de">Vorrichtung zur Herstellung von Steinformlingen fÃ¼r die Ziegelindustrie</dcterms:title>
       <dcterms:title xml:lang="en">Apparatus for manufacturing green bricks for the brick manufacturing industry</dcterms:title>
-      <dcterms:title xml:lang="fr">Dispositif pour la fabrication de briques crues utilisées dans l'industrie manufacturière des briques</dcterms:title>
+      <dcterms:title xml:lang="fr">Dispositif pour la fabrication de briques crues utilisÃ©es dans l'industrie manufacturiÃ¨re des briques</dcterms:title>
    </rdf:Description>
    <rdf:Description rdf:about="urn:x-temp:/doc/patent/EP-1000000-A1">
       <pmo:cites>
@@ -159,14 +126,14 @@
    </rdf:Description>
    <rdf:Description rdf:about="urn:x-temp:/doc/patent/EP-1000000-A1">
       <pmo:applicant>
-         <rdf:Description rdf:about="urn:x-temp:/id/03a72961-e2a9-47c2-9caa-892eacff05ff">
+         <rdf:Description rdf:about="urn:x-temp:/id/ee1020bf-892b-42ca-845b-a12b7b9ecb30">
             <rdf:type rdf:resource="http://www.owl-ontologies.com/sumo.owl#CognitiveAgent"/>
             <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
             <pmo:applicantOf rdf:resource="urn:x-temp:/doc/patent/EP-1000000-A1"/>
             <foaf:name>BOER BEHEER NIJMEGEN BV DE</foaf:name>
             <rdfs:label>BOER BEHEER NIJMEGEN BV DE</rdfs:label>
             <schema:address>
-               <rdf:Description rdf:about="urn:x-temp:/id/d78ff0ae-1d30-4b1a-90a4-869c6f08f3a6">
+               <rdf:Description rdf:about="urn:x-temp:/id/05459e78-10b2-4de0-a9ed-8b86927d6517">
                   <rdf:type rdf:resource="http://schema.org/PostalAddress"/>
                   <schema:addressCountry rdf:resource="urn:x-temp:/code/country/NL"/>
                </rdf:Description>
@@ -176,7 +143,7 @@
    </rdf:Description>
    <rdf:Description rdf:about="urn:x-temp:/doc/patent/EP-1000000-A1">
       <pmo:applicant>
-         <rdf:Description rdf:about="urn:x-temp:/id/c9a34ffc-70c3-4d13-bffb-a23c7e920bef">
+         <rdf:Description rdf:about="urn:x-temp:/id/9201c4de-b438-4972-a828-3e6987904d90">
             <rdf:type rdf:resource="http://www.owl-ontologies.com/sumo.owl#CognitiveAgent"/>
             <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
             <pmo:applicantOf rdf:resource="urn:x-temp:/doc/patent/EP-1000000-A1"/>
@@ -187,14 +154,14 @@
    </rdf:Description>
    <rdf:Description rdf:about="urn:x-temp:/doc/patent/EP-1000000-A1">
       <pmo:applicant>
-         <rdf:Description rdf:about="urn:x-temp:/id/9b1e7f27-7cc3-4bb8-8b6b-e42b76a644fe">
+         <rdf:Description rdf:about="urn:x-temp:/id/dd728603-f4ec-4e75-9ac5-a49a191e31b5">
             <rdf:type rdf:resource="http://www.owl-ontologies.com/sumo.owl#CognitiveAgent"/>
             <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
             <pmo:applicantOf rdf:resource="urn:x-temp:/doc/patent/EP-1000000-A1"/>
             <rdfs:label>Beheermaatschappij De Boer Nijmegen B.V.</rdfs:label>
             <foaf:name>Beheermaatschappij De Boer Nijmegen B.V.</foaf:name>
             <schema:address>
-               <rdf:Description rdf:about="urn:x-temp:/id/03997760-da16-4d0a-839f-867a107c81f6">
+               <rdf:Description rdf:about="urn:x-temp:/id/127ecc54-e519-41d7-809f-979976fa6565">
                   <rdf:type rdf:resource="http://schema.org/PostalAddress"/>
                   <schema:streetAddress>Koopvaardijweg 2</schema:streetAddress>
                   <schema:addressLocality>6541 BS Nijmegen</schema:addressLocality>
@@ -206,14 +173,14 @@
    </rdf:Description>
    <rdf:Description rdf:about="urn:x-temp:/doc/patent/EP-1000000-A1">
       <pmo:inventor>
-         <rdf:Description rdf:about="urn:x-temp:/id/5ec2781d-2cea-4d6f-8608-4caff2e55159">
+         <rdf:Description rdf:about="urn:x-temp:/id/153f70b2-da79-4643-8085-a7fa4582ded2">
             <rdf:type rdf:resource="http://www.owl-ontologies.com/sumo.owl#Human"/>
             <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
             <pmo:inventorOf rdf:resource="urn:x-temp:/doc/patent/EP-1000000-A1"/>
             <foaf:name>KOSMAN WILHELMUS JACOBUS MARIA</foaf:name>
             <rdfs:label>KOSMAN WILHELMUS JACOBUS MARIA</rdfs:label>
             <schema:address>
-               <rdf:Description rdf:about="urn:x-temp:/id/054b8488-a9e3-4408-b43e-6df60a0c587f">
+               <rdf:Description rdf:about="urn:x-temp:/id/6ffbe077-34de-4c5e-855a-0db357fde053">
                   <rdf:type rdf:resource="http://schema.org/PostalAddress"/>
                   <schema:addressCountry rdf:resource="urn:x-temp:/code/country/NL"/>
                </rdf:Description>
@@ -223,7 +190,7 @@
    </rdf:Description>
    <rdf:Description rdf:about="urn:x-temp:/doc/patent/EP-1000000-A1">
       <pmo:inventor>
-         <rdf:Description rdf:about="urn:x-temp:/id/8dcce872-3ac5-4dce-b6e0-afe949658eb9">
+         <rdf:Description rdf:about="urn:x-temp:/id/a850dbd0-91b0-476d-8247-45e87be0d4ab">
             <rdf:type rdf:resource="http://www.owl-ontologies.com/sumo.owl#Human"/>
             <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
             <pmo:inventorOf rdf:resource="urn:x-temp:/doc/patent/EP-1000000-A1"/>
@@ -234,14 +201,14 @@
    </rdf:Description>
    <rdf:Description rdf:about="urn:x-temp:/doc/patent/EP-1000000-A1">
       <pmo:inventor>
-         <rdf:Description rdf:about="urn:x-temp:/id/4dd5f038-7d9b-43c9-b0cb-d61a72c8685f">
+         <rdf:Description rdf:about="urn:x-temp:/id/2b3cdf79-9f4b-4729-a17e-146f48cc95a1">
             <rdf:type rdf:resource="http://www.owl-ontologies.com/sumo.owl#Human"/>
             <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
             <pmo:inventorOf rdf:resource="urn:x-temp:/doc/patent/EP-1000000-A1"/>
             <rdfs:label>KOSMAN, WILHELMUS JACOBUS MARIA</rdfs:label>
             <foaf:lastName>KOSMAN, WILHELMUS JACOBUS MARIA</foaf:lastName>
             <schema:address>
-               <rdf:Description rdf:about="urn:x-temp:/id/5b3e2f11-68c2-43c8-b2cd-c7528f0d6d7a">
+               <rdf:Description rdf:about="urn:x-temp:/id/eb1d7d51-07e6-406b-88f6-9787657a2a3a">
                   <rdf:type rdf:resource="http://schema.org/PostalAddress"/>
                   <schema:streetAddress>Bredeweg 9</schema:streetAddress>
                   <schema:addressLocality>6562 DA Groesbeek</schema:addressLocality>
@@ -253,14 +220,14 @@
    </rdf:Description>
    <rdf:Description rdf:about="urn:x-temp:/doc/patent/EP-1000000-A1">
       <property:agent>
-         <rdf:Description rdf:about="urn:x-temp:/id/57da6fd7-ecb4-4ca5-b5a9-2687ec1174c9">
+         <rdf:Description rdf:about="urn:x-temp:/id/e62ae62a-676a-410f-aac7-0f054b1e5f3a">
             <rdf:type rdf:resource="http://www.owl-ontologies.com/sumo.owl#Agent"/>
             <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
             <property:agentOf rdf:resource="urn:x-temp:/doc/patent/EP-1000000-A1"/>
             <rdfs:label>Schumann, Bernard Herman Johan</rdfs:label>
             <foaf:name>Schumann, Bernard Herman Johan</foaf:name>
             <schema:address>
-               <rdf:Description rdf:about="urn:x-temp:/id/923c6fd1-6b86-4f34-ba0f-f8cbb25a1f1a">
+               <rdf:Description rdf:about="urn:x-temp:/id/a276144e-c169-4c05-943d-cbea3138d110">
                   <rdf:type rdf:resource="http://schema.org/PostalAddress"/>
                   <schema:streetAddress>Arnold &amp;amp; Siedsma, Advocaten en Octrooigemachtigden, Sweelinckplein 1</schema:streetAddress>
                   <schema:addressLocality>2517 GK Den Haag</schema:addressLocality>

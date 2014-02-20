@@ -1,89 +1,53 @@
 package eu.fusepool.rdfizer.marec;
 
-import java.io.File;
 import java.io.InputStream;
 
-import org.apache.clerezza.rdf.core.MGraph;
-import org.apache.clerezza.rdf.core.impl.SimpleMGraph;
 import org.apache.clerezza.rdf.core.serializedform.Parser;
 import org.apache.clerezza.rdf.core.serializedform.SupportedFormat;
-import org.apache.clerezza.rdf.jena.parser.JenaParserProvider;
 import org.junit.Test;
 
 import eu.fusepool.rdfizer.marec.xslt.XMLProcessor;
 import eu.fusepool.rdfizer.marec.xslt.impl.PatentXSLTProcessor;
-
+import org.apache.clerezza.rdf.core.Graph;
+import org.junit.Assert;
 
 public class PatentXSLTProcessorTest {
-    /*
-    @Test
-    public void parseRdf() {
-        
-        MGraph graph = new SimpleMGraph();
-        
-       try {
-            
-           InputStream in = this.getClass().getResourceAsStream("EP-1000000-A1.rdf");
-           
-           Parser parser = Parser.getInstance();
-           
-           parser.bindParsingProvider(new JenaParserProvider());
-           
-           parser.parse(graph, in, SupportedFormat.RDF_XML);
-           
-           System.out.println("Number of triples: " + graph.size());
-           
-           Assert.assertTrue(graph.size() > 0);
-            
-            
-        } catch (Exception e) {
-            System.out.println("Error while parsing RDF data.");
-        }   
-    }
-    */
-    
     /**
-     * Start the catalog builder to deploy DTD files then start the transformation.
+     * Start the catalog builder to deploy DTD files then start the
+     * transformation.
      */
     @Test
-    public void transformXml() {
-        
-        
+    public void transformXml() throws Exception {
+
+
         // Start the transformer
         XMLProcessor processor = new PatentXSLTProcessor();
-        
-        // Transform a XML file
-        try {
-            
-            InputStream in = this.getClass().getResourceAsStream("EP-1000000-A1.xml");
-            
-            //System.out.println(IOUtils.toString(in));
-            
-            InputStream rdfIs = processor.processXML( in ) ;
-            
-            if(rdfIs != null) {
-                
-                Parser parser = Parser.getInstance();
-                
-                parser.bindParsingProvider(new JenaParserProvider());
-                
-                MGraph graph = new SimpleMGraph();
-                
-                parser.parse(graph, in, SupportedFormat.RDF_XML);
-                
-                System.out.println("Number of triples: " + graph.size());
-                
-            }
-            
-            rdfIs.close();
-            
-            System.out.println("Finished transformation from XML to RDF");
-            
-            
-        } catch (Exception e) {
-            System.out.println("Error while transforming XML data into RDF.") ;
-        }
-        
-    }
 
+        // Transform a XML file
+
+        InputStream xmlIn = this.getClass().getResourceAsStream("EP-1000000-A1.xml");
+
+        InputStream rdfFromXmlIn = processor.processXML(xmlIn);
+
+        Parser parser = Parser.getInstance();
+
+
+        Graph graphFromXml = parser.parse(rdfFromXmlIn, SupportedFormat.RDF_XML);
+        rdfFromXmlIn.close();
+        
+        InputStream rdfIn = this.getClass().getResourceAsStream("EP-1000000-A1.rdf");
+        Graph graphFromRdf = parser.parse(rdfIn, SupportedFormat.RDF_XML);
+        
+        //because of undeterministic URI assignment (UUIDs) this test cannot work
+        //Assert.assertEquals("The graph from XML is not the expected one", graphFromRdf, graphFromXml);
+
+        //checking that at least the size is right
+        Assert.assertEquals("The graph from XML is not of the expected size", 
+                graphFromRdf.size(), graphFromXml.size());
+
+        
+
+
+
+    }
 }
