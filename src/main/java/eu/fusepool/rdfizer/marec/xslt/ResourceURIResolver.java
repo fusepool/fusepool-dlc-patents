@@ -26,7 +26,7 @@ public class ResourceURIResolver implements URIResolver {
             return null;
         
         StreamSource sSource = null ;
-        InputStream xslIs = this.getClass().getResourceAsStream("/xsl/"+href) ;
+        InputStream xslIs = this.getClass().getResourceAsStream("/xsl/" + href) ;
         if(xslIs!=null) {
             sSource = new StreamSource(xslIs) ;
             return  sSource ;
