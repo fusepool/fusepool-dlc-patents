@@ -18,8 +18,10 @@ package eu.fusepool.rdfizer.marec;
 import eu.fusepool.datalifecycle.Rdfizer;
 import java.io.InputStream;
 import org.apache.clerezza.rdf.core.MGraph;
+import org.apache.clerezza.rdf.core.serializedform.Parser;
 import org.junit.Assert;
 import org.junit.Test;
+import org.apache.clerezza.rdf.jena.parser.JenaParserProvider;
 
 /**
  *
@@ -30,16 +32,21 @@ public class MarecRdfizerTest {
     Rdfizer rdfizer = new MarecRdfizer();
     
     @Test
-    public void fileUS() {
-    	/*
-        InputStream in = this.getClass().getResourceAsStream("US-H1-H.xml");
+    public void epoXml() {
+        //AccessController.checkPermission(new AllPermission());
+        /*
+        InputStream in = this.getClass().getResourceAsStream("/test/EP-1000000-A1.xml");
+        
+        Parser parser = Parser.getInstance();
+        parser.bindParsingProvider(new JenaParserProvider());
+        
         MGraph mGraph = rdfizer.transform(in);
         Assert.assertTrue(mGraph.size() > 0);
         */
     }
     
     @Test
-    public void fileEP() {
+    public void pubMedXml() {
     	/*
         InputStream in = this.getClass().getResourceAsStream("EP-1000000-A1.xml");
         MGraph mGraph = rdfizer.transform(in);
