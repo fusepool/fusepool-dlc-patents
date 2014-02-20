@@ -1,40 +1,38 @@
-/**
+/*.
+ * Copyright 2013 Fusepool Project.
  * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package eu.fusepool.rdfizer.marec.xslt;
 
-import java.io.IOException;
+import java.io.StringReader;
 
 
-import org.apache.xerces.util.XMLCatalogResolver;
 import org.apache.xml.resolver.tools.ResolvingXMLReader;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
 
-/**
- * @author giorgio
- *
- */
+
 public class MarecXMLReader extends ResolvingXMLReader {
 
-    
-    XMLCatalogResolver resolver ;
     
     /**
      * @throws Exception 
      * @throws SAXNotRecognizedException 
      * 
      */
-    public MarecXMLReader() throws SAXNotRecognizedException, Exception {
-        super();
-        String catalogPath = FileCatalogBuilder.getCatalogPath();
-        String [] catalogs = {"file:///" + catalogPath};
-        // Create catalog resolver and set a catalog list.
-        resolver = new XMLCatalogResolver();
-        resolver.setPreferPublic(true);
-        resolver.setCatalogList(catalogs);
-        
+    public MarecXMLReader() {
+        super();        
     }
 
     /* (non-Javadoc)
@@ -42,24 +40,6 @@ public class MarecXMLReader extends ResolvingXMLReader {
      */
     @Override
     public InputSource resolveEntity(String publicId, String systemId) {
-        try {
-            System.out.println("<public publicId=\"" + publicId + "\"" + " uri=\"" + systemId + "\" />");
-            InputSource is = resolver.resolveEntity(publicId, systemId);
-            if(is == null) {
-                System.out.println("############ NOT FOUND #########<public publicId=\""+publicId+"\"" + " uri=\""+systemId+"\" />");
-            }
-            return is ;
-        } catch (SAXException e) {
-            e.printStackTrace();
-            return null ;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null ;
-        }
+        return new InputSource(new StringReader(""));
     }
-
-
-    
-    
-    
 }

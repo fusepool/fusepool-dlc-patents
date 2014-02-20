@@ -8,14 +8,8 @@ import org.apache.clerezza.rdf.core.impl.SimpleMGraph;
 import org.apache.clerezza.rdf.core.serializedform.Parser;
 import org.apache.clerezza.rdf.core.serializedform.SupportedFormat;
 import org.apache.clerezza.rdf.jena.parser.JenaParserProvider;
-import org.apache.commons.io.IOUtils;
-import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.ConfigurationPolicy;
-import org.junit.Assert;
 import org.junit.Test;
 
-import eu.fusepool.rdfizer.marec.xslt.CatalogBuilder;
-import eu.fusepool.rdfizer.marec.xslt.FileCatalogBuilder;
 import eu.fusepool.rdfizer.marec.xslt.XMLProcessor;
 import eu.fusepool.rdfizer.marec.xslt.impl.PatentXSLTProcessor;
 
@@ -54,16 +48,6 @@ public class PatentXSLTProcessorTest {
     @Test
     public void transformXml() {
         
-        // Build the catalog of DTDs files
-        File baseDir = new File("/home/luigi/test");
-        
-        FileCatalogBuilder catalogBuilder = new FileCatalogBuilder(baseDir) ;
-        try {
-            catalogBuilder.build() ;
-        } catch (Exception e) {
-            System.out.println("Error building DTDs files catalog.\n");
-            e.printStackTrace();
-        }
         
         // Start the transformer
         XMLProcessor processor = new PatentXSLTProcessor();
