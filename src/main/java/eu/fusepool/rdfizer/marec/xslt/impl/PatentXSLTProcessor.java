@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.sax.SAXSource;
@@ -12,6 +13,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.xml.resolver.tools.ResolvingXMLFilter;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXNotRecognizedException;
 
 import eu.fusepool.rdfizer.marec.xslt.MarecXMLReader;
 import eu.fusepool.rdfizer.marec.xslt.ResourceURIResolver;
@@ -38,7 +40,7 @@ public class PatentXSLTProcessor implements XMLProcessor {
 
     }
 
-    public InputStream processXML(InputStream is) throws TransformerException {
+    public InputStream processXML(InputStream is) throws SAXNotRecognizedException, TransformerException {
         URIResolver defResolver = tFactory.getURIResolver();
         ResourceURIResolver customResolver = new ResourceURIResolver(defResolver);
         tFactory.setURIResolver(customResolver);
