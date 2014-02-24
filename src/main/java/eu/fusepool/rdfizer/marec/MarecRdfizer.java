@@ -33,6 +33,8 @@ import org.osgi.framework.Constants;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xml.sax.SAXNotRecognizedException;
+
 import eu.fusepool.datalifecycle.Rdfizer;
 import eu.fusepool.rdfizer.marec.xslt.XMLProcessor;
 import eu.fusepool.rdfizer.marec.xslt.impl.PatentXSLTProcessor;
@@ -78,7 +80,10 @@ public class MarecRdfizer implements Rdfizer {
             throw new RuntimeException(ex);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
-        } 
+        } catch (SAXNotRecognizedException ex) {
+            throw new RuntimeException(ex);
+        }
+        
     }
 
     public String getName() {
