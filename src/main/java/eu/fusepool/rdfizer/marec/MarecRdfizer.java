@@ -57,7 +57,7 @@ public class MarecRdfizer implements Rdfizer {
      */
     public static final int DEFAULT_SERVICE_RANKING = 101;
     public final String RDFIZER_TYPE_LABEL = "rdfizer";
-    public final String RDFIZER_TYPE_VALUE = "marec";
+    public final String RDFIZER_TYPE_VALUE = "patent";
     final Logger log = LoggerFactory.getLogger(this.getClass());
     //default visibility for tests
     @Reference
