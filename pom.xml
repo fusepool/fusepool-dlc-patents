@@ -49,15 +49,15 @@
                 <version>2.3.7</version>
                 <extensions>true</extensions>
                 <configuration>
-                <!-- Embed saxon jars -->
-					<instructions>
-						<Embed-Dependency>xercesImpl;saxon;xml-resolver;commons-lang3;scope=compile</Embed-Dependency>
-						<Embed-Transitive>true</Embed-Transitive>
-						<Data-Files>data,data/catalog,dtd</Data-Files>
-						<Data-Files-Priority>-100</Data-Files-Priority>
-						<Import-Package>!sun.io.*, * </Import-Package>
-					</instructions>
-				</configuration>
+                    <!-- Embed saxon jars -->
+                    <instructions>
+                        <Embed-Dependency>xercesImpl;saxon;xml-resolver;commons-lang3;scope=compile</Embed-Dependency>
+                        <Embed-Transitive>true</Embed-Transitive>
+                        <Data-Files>data,data/catalog,dtd</Data-Files>
+                        <Data-Files-Priority>-100</Data-Files-Priority>
+                        <Import-Package>!sun.io.*, * </Import-Package>
+                    </instructions>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -115,16 +115,16 @@
             <version>2.0.2</version>
         </dependency>
         <dependency>
-			<groupId>net.sourceforge.saxon</groupId>
-			<artifactId>saxon</artifactId>
-			<version>9.1.0.8</version>
-		</dependency>
+            <groupId>net.sourceforge.saxon</groupId>
+            <artifactId>saxon</artifactId>
+            <version>9.1.0.8</version>
+        </dependency>
 		
-		<dependency>
-          <groupId>org.apache.clerezza</groupId>
-          <artifactId>org.apache.clerezza.rdf.jena.parser</artifactId>
-          <version>0.10-incubating-SNAPSHOT</version>
-          <scope>test</scope>
-       </dependency>
+        <dependency>
+            <groupId>org.apache.clerezza</groupId>
+            <artifactId>org.apache.clerezza.rdf.jena.parser</artifactId>
+            <version>0.10-incubating-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
