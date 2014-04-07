@@ -50,6 +50,7 @@
                 <configuration>
                     <!-- Embed saxon jars -->
                     <instructions>
+                        <Bundle-Category>Fusepool Rdfizer</Bundle-Category>
                         <Embed-Dependency>xercesImpl;saxon;xml-resolver;commons-lang3;scope=compile</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Data-Files>data,data/catalog,dtd</Data-Files>
