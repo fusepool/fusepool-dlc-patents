@@ -50,7 +50,7 @@
                 <configuration>
                     <!-- Embed saxon jars -->
                     <instructions>
-                        <Bundle-Category>Fusepool Rdfizer</Bundle-Category>
+                        <Bundle-Category>Fusepool DLC Support</Bundle-Category>
                         <Embed-Dependency>xercesImpl;saxon;xml-resolver;commons-lang3;scope=compile</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Data-Files>data,data/catalog,dtd</Data-Files>
@@ -112,6 +112,16 @@
             <artifactId>org.apache.clerezza.rdf.jena.parser</artifactId>
             <version>0.10-incubating-SNAPSHOT</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.stanbol</groupId>
+            <artifactId>org.apache.stanbol.enhancer.core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.fusepool</groupId>
+            <artifactId>ecs.ontologies</artifactId>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
