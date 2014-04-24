@@ -32,4 +32,10 @@ public class Ontology {
      */
     public static final UriRef MultiEnhancer = new UriRef("http://example.org/service-description#MultiEnhancer");
     
+    // Terms from Patent Expert Ontology
+    public static final String PREFIX = "http://www.patexpert.org/ontologies/pmo.owl#";
+    public static final UriRef applicant = new UriRef(PREFIX + "applicant");
+    public static final UriRef inventor = new UriRef(PREFIX + "inventor");
+    public static final UriRef PatentPublication = new UriRef(PREFIX + "PatentPublication");
+    
 }
