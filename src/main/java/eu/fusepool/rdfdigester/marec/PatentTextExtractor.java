@@ -114,6 +114,7 @@ public class PatentTextExtractor implements RdfDigester {
             
             
             //send the text to the default chain for enhancements if not empty
+            /*
             if(! "".equals(text) && text != null ) {
 	            try {
 					enhance(text, patentRef, graph);
@@ -125,7 +126,7 @@ public class PatentTextExtractor implements RdfDigester {
 					e.printStackTrace();
 				}
             }
-            
+            */
             //add a dc:subject statement for each individual that is the object of the predicate pmo:applicant
             aliasAsDcSubject(patentRef, Ontology.applicant, graph);
             //add a dc:subject statement for each individual that is the object of the predicate pmo:inventor
@@ -234,8 +235,7 @@ public class PatentTextExtractor implements RdfDigester {
      * so that the enhancements will be referred that node. Each enhancement found with a confidence 
      * value above a threshold is then added as a dc:subject to the node
      */
-    private void enhance(String content, UriRef patentRef, MGraph graph) throws IOException,
-            EnhancementException {
+    private void enhance(String content, UriRef patentRef, MGraph graph) throws IOException, EnhancementException {
         final ContentSource contentSource = new ByteArraySource(
                 content.getBytes(), "text/plain");
         final ContentItem contentItem = contentItemFactory.createContentItem(
