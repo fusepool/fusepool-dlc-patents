@@ -78,9 +78,6 @@ public class PatentTextExtractor implements RdfDigester {
 	
 	public final String DIGESTER_TYPE_VALUE = "patent";
 	
-	//Confidence threshold value to accept entities extracted by an NLP enhancement engine
-    private static final double CONFIDENCE_THRESHOLD = 0.3;
-	
 	private static Logger log = LoggerFactory.getLogger(PatentTextExtractor.class);
 	
 	@Reference
@@ -103,30 +100,13 @@ public class PatentTextExtractor implements RdfDigester {
 	 * @throws IOException 
 	 */
 	public void extractText(MGraph graph) {
-		String text = "";
 		// select all the resources that are pmo:PatentPubblication and do not have a sioc:content property 
 		Set<UriRef> patentRefs = getPatents( graph );
 		for (UriRef patentRef : patentRefs) {
             
 			log.info("Adding sioc:content property to patent: " + patentRef.getUnicodeString());
 			// extract text from properties and add it to the patent with a sioc:content property
-            text = addSiocContentToPatent(graph, patentRef);
-            
-            
-            //send the text to the default chain for enhancements if not empty
-            /*
-            if(! "".equals(text) && text != null ) {
-	            try {
-					enhance(text, patentRef, graph);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (EnhancementException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
-            */
+            addSiocContentToPatent(graph, patentRef);
             //add a dc:subject statement for each individual that is the object of the predicate pmo:applicant
             aliasAsDcSubject(patentRef, Ontology.applicant, graph);
             //add a dc:subject statement for each individual that is the object of the predicate pmo:inventor
@@ -176,7 +156,7 @@ public class PatentTextExtractor implements RdfDigester {
      * The value is taken from dcterm:title and dcterms:abstract properties 
      */
 
-    private String addSiocContentToPatent(MGraph graph, UriRef patentRef) {
+    private void addSiocContentToPatent(MGraph graph, UriRef patentRef) {
     
     	AccessController.checkPermission(new AllPermission());
     	
@@ -224,67 +204,7 @@ public class PatentTextExtractor implements RdfDigester {
         	log.info("No text found in dcterms:title or dcterms:abstract to add to sioc:content");
         }
 
-        return textContent;
-
     }
-    
-    /**
-     * Add dc:subject properties to a node (patent) pointing to entities which are assumed to be related to
-     * a content. This method uses the enhancementJobManager to extract related entities using NLP 
-     * processor available in the default chain. The node uri is also the uri of the content item
-     * so that the enhancements will be referred that node. Each enhancement found with a confidence 
-     * value above a threshold is then added as a dc:subject to the node
-     */
-    private void enhance(String content, UriRef patentRef, MGraph graph) throws IOException, EnhancementException {
-        final ContentSource contentSource = new ByteArraySource(
-                content.getBytes(), "text/plain");
-        final ContentItem contentItem = contentItemFactory.createContentItem(
-                patentRef, contentSource);
-        enhancementJobManager.enhanceContent(contentItem);
-        // this contains the enhancement results
-        final MGraph enhancementGraph = contentItem.getMetadata();
-        addSubjects(patentRef, enhancementGraph, graph);
-    }
-    
-    /** 
-     * Add dc:subject property to patent (pmo:PatentPublication) pointing to entities 
-     * extracted by NLP engines in the default chain. Given a node (patent) and a TripleCollection 
-     * containing fise:Enhancements about that patent dc:subject properties are added to it pointing 
-     * to entities referenced by those enhancements if the enhancement confidence value is above a 
-     * threshold.
-     * @param node
-     * @param metadata
-     */
-    private void addSubjects(UriRef patentRef, TripleCollection metadata, MGraph graph) {
-        final GraphNode enhancementType = new GraphNode(TechnicalClasses.ENHANCER_ENHANCEMENT, metadata);
-        final Set<UriRef> entities = new HashSet<UriRef>();
-        // get all the enhancements
-        final Iterator<GraphNode> enhancements = enhancementType.getSubjectNodes(RDF.type);
-        while (enhancements.hasNext()) {
-            final GraphNode enhhancement = enhancements.next();
-          //look the confidence value for each enhancement
-            double enhancementConfidence = LiteralFactory.getInstance().createObject(Double.class,
-            		(TypedLiteral) enhhancement.getLiterals(org.apache.stanbol.enhancer.servicesapi.rdf.Properties.ENHANCER_CONFIDENCE).next());
-            if( enhancementConfidence >= CONFIDENCE_THRESHOLD ) {            
-            	// get entities referenced in the enhancement 
-            	final Iterator<Resource> referencedEntities = enhhancement.getObjects(org.apache.stanbol.enhancer.servicesapi.rdf.Properties.ENHANCER_ENTITY_REFERENCE);
-            	while (referencedEntities.hasNext()) {
-	                final UriRef entity = (UriRef) referencedEntities.next();	                
-	                // Add dc:subject to the patent for each referenced entity
-                	graph.add(new TripleImpl(patentRef, DC.subject, entity));
-                    entities.add(entity);
-                }
-            }
-
-
-        }
-        for (UriRef uriRef : entities) {
-            // We don't get the entity description directly from metadata
-            // as the context there would include
-            addResourceDescription(uriRef, graph);
-        }
-    }
-    
     /**
      * Add a dc:subject statement to a patent for each entity that is linked 
      * to that resource through the predicate passed as argument..  
@@ -310,20 +230,6 @@ public class PatentTextExtractor implements RdfDigester {
     		graph.addAll(resultGraph);
     	}
         
-    }
-    
-    /** 
-     * Add a description of the entities extracted from the text by NLP engines in the default chain
-     */
-    private void addResourceDescription(UriRef iri, MGraph mGraph) {
-        final Entity entity = siteManager.getEntity(iri.getUnicodeString());
-        if (entity != null) {
-            final RdfValueFactory valueFactory = new RdfValueFactory(mGraph);
-            final Representation representation = entity.getRepresentation();
-            if (representation != null) {
-                valueFactory.toRdfRepresentation(representation);
-            }
-        }
     }
 	
 	@Activate
